@@ -1,8 +1,13 @@
 import { BiPhoneCall, BiTimeFive } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { AuthContext } from "../context/AuthContext";
 
 const TopAds = () => {
+  const {user, setUser} = useContext(AuthContext)
+
   return (
     <div className="fixed top-0 w-[100%] h-[8vh] bg-gray-800 flex items-center px-[50px]">
       <div className="flex flex-1">
@@ -32,22 +37,34 @@ const TopAds = () => {
         </p>
       </div>
       <div className="flex flex-1 justify-end">
-        <Link to='/login'>
-            <button 
-                className="mr-[30px] text-white font-semibold px-[20px] py-[2px] bg-black rounded-md text-[var(--secondary-color)]
-                hover:text-black hover:bg-[--secondary-color]"
-            >
-            login
-            </button>
-        </Link>
-        <Link to="/register">
-            <button 
-                className="font-semibold px-[20px] py-[2px] bg-[var(--secondary-color)] rounded-md 
-                hover:bg-black hover:text-[var(--secondary-color)]"
-            >
-            register
-            </button>
-        </Link>
+        {user ? (
+          <button
+            className="font-semibold px-[20px] py-[2px] bg-[var(--secondary-color)] rounded-md 
+            hover:bg-black hover:text-[var(--secondary-color)]"
+            onClick={() => setUser(null)}
+          >
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link to='/login'>
+                <button 
+                    className="mr-[30px] text-white font-semibold px-[20px] py-[2px] bg-black rounded-md text-[var(--secondary-color)]
+                    hover:text-black hover:bg-[--secondary-color]"
+                >
+                login
+                </button>
+            </Link>
+            <Link to="/register">
+                <button 
+                    className="font-semibold px-[20px] py-[2px] bg-[var(--secondary-color)] rounded-md 
+                    hover:bg-black hover:text-[var(--secondary-color)]"
+                >
+                register
+                </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

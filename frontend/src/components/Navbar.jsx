@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({name}) => {
+
+  console.log(name)
   return (
     <div className="fixed top-[8vh] w-[100%] h-[10vh] bg-black flex px-[50px] items-center justify-between">
       <div className="flex items-center">
@@ -10,27 +12,31 @@ const Navbar = () => {
       <div className="">
         <ul>
           <li className="text-white">
-            <a
+            <Link
               className="mr-3 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
               rounded-full"
-              href="#home"
+              to="/"
             >
               Home
-            </a>
-            <a
-              className="mr-3 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
-              rounded-full"
-              href="#services"
-            >
-              Services
-            </a>
-            <a
-              className="mr-4 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
-              rounded-full"
-              href="#features"
-            >
-              Features
-            </a>
+            </Link>
+            {name === 'newRide' ? '' : name === 'booked' ? '' : (
+              <> 
+              <a
+                className="mr-3 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
+                rounded-full"
+                href="#services"
+              >
+                Services
+              </a>
+              <a
+                className="mr-4 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
+                rounded-full"
+                href="#features"
+              >
+                Features
+              </a>
+              </>
+            )}
             <Link
               className="mr-3 font-medium px-[20px] py-[6px] hover:text-black hover:bg-[var(--secondary-color)] 
               rounded-full"

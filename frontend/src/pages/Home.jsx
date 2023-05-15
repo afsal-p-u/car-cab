@@ -5,6 +5,7 @@ import Poster from '../components/Poster'
 import BookRide from '../components/BookRide'
 import Services from '../components/Services'
 import Footer from '../components/Footer'
+import Features from '../components/Features'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Poster />
       <BookRide />
       <Services />
+      <Features />
       <Footer />
     </>
   )

@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const BookRide = () => {
+  const [inputs, setInputs] = useState(null)
+
+  const {user} = useContext(AuthContext)
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return {...prev, [e.target.name]: e.target.value}
+    })
+  }
+
   return (
     <div className="mt-[-60px] w-[100%] box-border left-0 px-[60px] mb-5">
       <div className="bg-white rounded-md w-[100%] m-auto min-h-[9vh] p-[45px] shadow">
@@ -13,6 +25,8 @@ const BookRide = () => {
               placeholder="Type location"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="pickUpLocation"
             />
           </div>
           <div className="flex flex-col">
@@ -22,15 +36,19 @@ const BookRide = () => {
               placeholder="Type location"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="dropOfLocation"
             />
           </div>
           <div className="flex flex-col">
             <label htmlFor="" className="text-[13px] mb-[5px]">No. of Passengers (max: 3)</label>
             <input
-              type="text"
+              type="Number"
               placeholder="Passengers count"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="passengerCount"
             />
           </div>
           <div className="flex flex-col">
@@ -40,6 +58,8 @@ const BookRide = () => {
               placeholder="Passengers name"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="passengerNames"
             />
           </div>
           <div className="flex flex-col">
@@ -49,6 +69,8 @@ const BookRide = () => {
               placeholder="Contact number"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="contactNumber"
             />
           </div>
           <div className="flex flex-col">
@@ -57,6 +79,8 @@ const BookRide = () => {
               type="date"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="pickUpDate"
             />
           </div>
           <div className="flex flex-col">
@@ -65,16 +89,31 @@ const BookRide = () => {
               type="time"
               className="border-[1.5px] border-gray-300 outline-[1px] px-[10px] py-[5px] rounded-md outline-none text-[14px]
               w-[250px]"
+              onChange={handleChange}
+              name="pickUpTime"
             />
           </div>
         </div>
         <div className="mt-5 flex items-center justify-end">
+        {user ? (
+          <Link to='book-new' state={{inputs}}>
             <button 
                 className="px-[25px] py-[7px] bg-[var(--secondary-color)] rounded-full font-semibold
                 hover:bg-black hover:text-[var(--secondary-color)]"
             >
                 Book Taxi
             </button>
+          </Link>
+            ) : (
+              <Link to="/login">
+                <button
+                  className="px-[20px] py-[5px] bg-[var(--secondary-color)] rounded-md font-medium hover:bg-black
+                  hover:text-[var(--secondary-color)]"
+                >
+                  Login
+                </button>
+              </Link>
+            )}
         </div>
       </div>
     </div>
